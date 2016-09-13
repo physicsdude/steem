@@ -4,7 +4,6 @@
 *.cmake
 CMakeCache.txt
 CMakeFiles
-Makefile
 compile_commands.json
 moc_*
 *.moc

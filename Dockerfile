@@ -27,35 +27,9 @@ RUN \
 
 ADD . /usr/local/src/steem
 
-RUN \
-    cd /usr/local/src/steem && \
-    git submodule update --init --recursive && \
-    rsync -a \
-        /usr/local/src/steem/ \
-        /usr/local/src/steemtest/
-
-RUN \
-    cd /usr/local/src/steemtest && \
-    cmake \
-        -DCMAKE_BUILD_TYPE=Debug \
-        -DBUILD_STEEM_TESTNET=On \
-        -DLOW_MEMORY_NODE=ON \
-        . \
-    && \
-    make -j$(nproc) chain_test && \
-    ./tests/chain_test && \
-    rm -rf /usr/local/src/steemtest
-
-RUN \
-    cd /usr/local/src/steem && \
-    cmake \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DLOW_MEMORY_NODE=ON \
-        . \
-    && \
-    make -j$(nproc) && \
-    make install && \
-    rm -rf /usr/local/src/steem
+RUN cd /usr/local/src/steem && \
+    make test && \
+    make install
 
 RUN \
     apt-get remove -y \

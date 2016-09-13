@@ -4,5 +4,4 @@ machine:
 
 test:
     override:
-        - docker info
-        - docker build --rm=false -t steemit/steem .
+        - make docker
