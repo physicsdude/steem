@@ -30,6 +30,9 @@ build/Makefile:
 build: build/Makefile
 	cd build && make $(MAKEOPTS)
 
+osxtest:
+	bash tests/scripts/osx-run-tests.sh
+
 test: submodule_init clean
 	mkdir build
 	cd build && cmake $(CMAKE_OPTS) \
